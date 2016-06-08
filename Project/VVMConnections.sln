@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "Test\WpfApp\WpfApp.csproj", "{02A2ACD2-D80E-49A7-A457-48B0EE18BB0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VVMConnection", "VVMConnection\VVMConnection.csproj", "{81BB06B7-9AD2-4065-82C1-ACCB8027B377}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02A2ACD2-D80E-49A7-A457-48B0EE18BB0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02A2ACD2-D80E-49A7-A457-48B0EE18BB0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02A2ACD2-D80E-49A7-A457-48B0EE18BB0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02A2ACD2-D80E-49A7-A457-48B0EE18BB0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81BB06B7-9AD2-4065-82C1-ACCB8027B377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81BB06B7-9AD2-4065-82C1-ACCB8027B377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81BB06B7-9AD2-4065-82C1-ACCB8027B377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81BB06B7-9AD2-4065-82C1-ACCB8027B377}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
