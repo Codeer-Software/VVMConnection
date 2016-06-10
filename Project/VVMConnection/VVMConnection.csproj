@@ -43,6 +43,7 @@
     <Compile Include="CommandExtension.cs" />
     <Compile Include="EventExtension.cs" />
     <Compile Include="Connection.cs" />
+    <Compile Include="MessageBox.cs" />
     <Compile Include="Method.cs" />
     <Compile Include="MethodCollection.cs" />
     <Compile Include="NotifyValue.cs" />
