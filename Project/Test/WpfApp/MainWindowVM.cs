@@ -20,12 +20,12 @@ namespace WpfApp
 
         public void HelloWorld()
         {
-            NotifyText("こんにちわ");
+            NotifyText("HelloWorld");
         }
 
         public void Calculate()
         {
-            bool? ret = Ask("答え知りたい？");
+            bool? ret = Ask("Do you want to know the answer?");
             if (ret != true)
             {
                 return;

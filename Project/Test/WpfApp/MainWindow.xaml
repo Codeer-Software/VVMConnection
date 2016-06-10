@@ -11,21 +11,17 @@
     <j:Connection.Methods>
         <j:MethodCollection>
             <j:Method Name ="ShowText" Invoker="NotifyText"/>
-            
             <j:Method Name ="Show" Invoker="Ask">
                 <j:Method.Target>
                     <l:MessageBox Caption="タイトル" Button="{x:Static MessageBoxButton.YesNo}"/>
                 </j:Method.Target>
             </j:Method>
-
         </j:MethodCollection>
     </j:Connection.Methods>
 
-
     <StackPanel>
-        <!--この辺はいらんかなー-->
-        <Button Content="こんにちわ-Event" Click="{j:Event HelloWorld }"/>
-        <Button Content="こんにちわ-Command" Command="{j:Command HelloWorld }"/>
+        <Button Content="HelloWorld-Event" Click="{j:Event HelloWorld }"/>
+        <Button Content="HelloWorld-Command" Command="{j:Command HelloWorld }"/>
         <StackPanel Orientation="Horizontal">
             <TextBox Width="100" Text="{Binding Number.Value, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="×2" Command="{j:Command Calculate, CanCalculate }"/>

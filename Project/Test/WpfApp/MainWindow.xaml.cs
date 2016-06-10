@@ -17,7 +17,6 @@ namespace WpfApp
 
     public class MessageBox
     {
-        public object X { get; set; }
         public string Caption { get; set; } = string.Empty;
         public MessageBoxButton Button { get; set; } = MessageBoxButton.OK;
         public bool? Show(string message)

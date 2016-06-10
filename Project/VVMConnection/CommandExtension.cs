@@ -1,5 +1,5 @@
-﻿using Reactive.Bindings;
-using System;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Markup;
@@ -27,32 +27,25 @@ namespace VVMConnection
             var targetProvider = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
             if (targetProvider == null)
             {
-                return new CommandEmpty();
+                return null;
             }
             var target = targetProvider.TargetObject as FrameworkElement;
             if (target == null)
             {
-                return new CommandEmpty();
+                return null;
             }
             return new CommandBridge(target, _method, _enableProperty);
         }
 
-        public class CommandEmpty : ICommand
-        {
-            public event EventHandler CanExecuteChanged = (_, __) => { };
-            public bool CanExecute(object parameter) { return false; }
-            public void Execute(object parameter) { }
-        }
-
-        public class CommandBridge : ICommand
+        class CommandBridge : ICommand
         {
             public event EventHandler CanExecuteChanged = (_,__)=> { };
 
             Action _invoke;
             Action<object> _invokeParam;
-            ReactiveProperty<bool> _enable;
+            dynamic _enable;
 
-            public CommandBridge(FrameworkElement target, string method, string enableProperty)
+            internal CommandBridge(FrameworkElement target, string method, string enableProperty)
             {
                 var connect = MakeConnectAction(target, method, enableProperty);
                 connect();
@@ -91,18 +84,35 @@ namespace VVMConnection
                     {
                         return;
                     }
-                    if (!string.IsNullOrEmpty(enableProperty))
+                    if (string.IsNullOrEmpty(enableProperty))
                     {
-                        var propInfo = vmType.GetProperty(enableProperty);
-                        if (propInfo != null && propInfo.PropertyType == typeof(ReactiveProperty<bool>))
-                        {
-                            _enable = propInfo.GetValue(vm) as ReactiveProperty<bool>;
-                            _enable.PropertyChanged += (_, __) => CanExecuteChanged(this, EventArgs.Empty);
-                        }
+                        return;
                     }
+                    var propInfo = vmType.GetProperty(enableProperty);
+                    if (propInfo == null)
+                    {
+                        return;
+                    }
+                    _enable = propInfo.GetValue(vm);
+                    if (_enable == null)
+                    {
+                        return;
+                    }
+                    Type type = _enable.GetType();
+                    var propertyChanged = type.GetEvent("PropertyChanged");
+                    if (propertyChanged == null || propertyChanged.EventHandlerType != typeof(PropertyChangedEventHandler))
+                    {
+                        return;
+                    }
+                    var valueProperty = type.GetProperty("Value");
+                    if (valueProperty == null || valueProperty.PropertyType != typeof(bool))
+                    {
+                        return;
+                    }
+                    PropertyChangedEventHandler h = (_, __) => CanExecuteChanged(this, EventArgs.Empty);
+                    _enable.PropertyChanged += h;
                 };
             }
-
         }
     }
 }
