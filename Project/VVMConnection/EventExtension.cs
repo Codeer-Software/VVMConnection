@@ -76,8 +76,8 @@ namespace VVMConnection
                     new object[] { o, e, target.DataContext.GetType().GetMethod(_path).CreateDelegate(args[2].ParameterType, target.DataContext) });
             }
 
-            var arguments = handlerType.GetMethod("Invoke").GetParameters();
-            var conType = typeof(Listener<,>).MakeGenericType(arguments[0].ParameterType, arguments[1].ParameterType);
+            var arguments = handlerType.GetMethod("Invoke").GetParameters().Select(e=>e.ParameterType).ToArray();
+            var conType = typeof(Listener<,>).MakeGenericType(arguments[0], arguments[1]);
             return conType.GetMethod("Connect").Invoke(null, new object[] { handlerType, invoke });
         }
 
