@@ -2,7 +2,7 @@
 
 namespace VVMConnection
 {
-    public class NotifyValue<T> : INotifyPropertyChanged
+    public class Notify<T> : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = (_, __) => { };
 
@@ -17,7 +17,7 @@ namespace VVMConnection
             }
         }
 
-        public NotifyValue() { }
-        public NotifyValue(T value) { _value = value; }
+        public Notify() { }
+        public Notify(T value) { _value = value; }
     }
 }

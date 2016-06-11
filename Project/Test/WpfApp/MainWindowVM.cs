@@ -32,5 +32,10 @@ namespace WpfApp
             }
             Answer.Value = (int.Parse(Number.Value) * 2).ToString();
         }
+
+        public void ExecuteFiles(string[] files)
+        {
+
+        }
     }
 }

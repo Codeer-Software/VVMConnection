@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:l="clr-namespace:WpfApp"
         xmlns:c="clr-namespace:VVMConnection;assembly=VVMConnection"
+        AllowDrop="True"
+        Drop="{c:Event ExecuteFiles, WpfApp.BridgeDrop.Files }"
         Title="MainWindow" Height="350" Width="525">
     <Window.DataContext>
         <l:MainWindowVM/>
