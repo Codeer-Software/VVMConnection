@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows;
+using System.Linq;
 
 namespace VVMConnection
 {
@@ -62,7 +63,14 @@ namespace VVMConnection
             {
                 return null;
             }
-            var replayMethodInfo = view.GetType().GetMethod(Name);
+
+            var invokeInfo = invokerProp.PropertyType.GetMethod("Invoke");
+            if (invokeInfo == null)
+            {
+                return null;
+            }
+
+            var replayMethodInfo = view.GetType().GetMethod(Name, invokeInfo.GetParameters().Select(e=>e.ParameterType).ToArray());
             if (replayMethodInfo == null)
             {
                 return null;
