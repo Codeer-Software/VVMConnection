@@ -77,11 +77,11 @@ namespace VVMConnection
             }
 
             var arguments = handlerType.GetMethod("Invoke").GetParameters();
-            var conType = typeof(Core<,>).MakeGenericType(arguments[0].ParameterType, arguments[1].ParameterType);
+            var conType = typeof(Listener<,>).MakeGenericType(arguments[0].ParameterType, arguments[1].ParameterType);
             return conType.GetMethod("Connect").Invoke(null, new object[] { handlerType, invoke });
         }
 
-        static class Core<O,E>
+        static class Listener<O,E>
         {
             public class Connector
             {
