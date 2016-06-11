@@ -18,12 +18,17 @@ namespace VVMConnection
 
         static void Changed(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            if (sender == null)
+            var element = sender as FrameworkElement;
+            if (element == null)
             {
                 return;
             }
             var col = sender.GetValue(MethodsProperty) as MethodCollection;
-            col.ToList().ForEach(x => x.Connect(sender as FrameworkElement));
+            if (col == null)
+            {
+                return;
+            }
+            col.ToList().ForEach(x => x.Connect(element));
         }
     }
 }
