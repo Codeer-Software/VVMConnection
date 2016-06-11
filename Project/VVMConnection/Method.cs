@@ -50,14 +50,14 @@ namespace VVMConnection
 
         Delegate GetMethod(FrameworkElement element, PropertyInfo invokerProp)
         {
-            object view = null;
+            object target = null;
             if (Target != null)
             {
-                view = Target;
+                target = Target;
             }
             else if (element != null)
             {
-                view = element;
+                target = element;
             }
             else
             {
@@ -69,13 +69,13 @@ namespace VVMConnection
             {
                 return null;
             }
-
-            var replayMethodInfo = view.GetType().GetMethod(Name, invokeInfo.GetParameters().Select(e=>e.ParameterType).ToArray());
-            if (replayMethodInfo == null)
+            
+            var targetMethodInfo = target.GetType().GetMethod(Name, invokeInfo.GetParameters().Select(e=>e.ParameterType).ToArray());
+            if (targetMethodInfo == null)
             {
                 return null;
             }
-            return replayMethodInfo.CreateDelegate(invokerProp.PropertyType, view);
+            return targetMethodInfo.CreateDelegate(invokerProp.PropertyType, target);
         }
     }
 }
