@@ -39,7 +39,7 @@ namespace VVMConnection
 
         class CommandBridge : ICommand
         {
-            public event EventHandler CanExecuteChanged = (_,__)=> { };
+            public event EventHandler CanExecuteChanged = (_, __) => { };
 
             Action _invoke;
             Action<object> _invokeParam;
@@ -52,7 +52,7 @@ namespace VVMConnection
                 target.DataContextChanged += (_, __) => connect();
             }
 
-            public bool CanExecute(object parameter)=> _enable == null ? true : _enable.Value;
+            public bool CanExecute(object parameter) => _enable == null ? true : _enable.Value;
 
             public void Execute(object parameter)
             {
@@ -69,8 +69,13 @@ namespace VVMConnection
                     {
                         return;
                     }
+                    
                     var vmType = vm.GetType();
                     var methodInfo = vmType.GetMethod(method);
+                    if (methodInfo == null)
+                    {
+                        return;
+                    }
                     var args = methodInfo.GetParameters();
                     if (args.Length == 0)
                     {
