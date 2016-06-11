@@ -88,29 +88,26 @@ namespace VVMConnection
                     {
                         return;
                     }
-                    var propInfo = vmType.GetProperty(enableProperty);
-                    if (propInfo == null)
+
+                    var enablePropertyInfo = vmType.GetProperty(enableProperty);
+                    if (enablePropertyInfo == null)
                     {
                         return;
                     }
-                    _enable = propInfo.GetValue(vm);
-                    if (_enable == null)
+
+                    var enable = enablePropertyInfo.GetValue(vm) as INotifyPropertyChanged;
+                    if (enable == null)
                     {
                         return;
                     }
-                    Type type = _enable.GetType();
-                    var propertyChanged = type.GetEvent("PropertyChanged");
-                    if (propertyChanged == null || propertyChanged.EventHandlerType != typeof(PropertyChangedEventHandler))
-                    {
-                        return;
-                    }
-                    var valueProperty = type.GetProperty("Value");
+                    Type enableType = enable.GetType();
+                    var valueProperty = enableType.GetProperty("Value");
                     if (valueProperty == null || valueProperty.PropertyType != typeof(bool))
                     {
                         return;
                     }
-                    PropertyChangedEventHandler h = (_, __) => CanExecuteChanged(this, EventArgs.Empty);
-                    _enable.PropertyChanged += h;
+                    enable.PropertyChanged += (_, __) => CanExecuteChanged(this, EventArgs.Empty);
+                    _enable = enable;
                 };
             }
         }

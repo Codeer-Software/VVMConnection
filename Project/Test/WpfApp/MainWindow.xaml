@@ -15,7 +15,7 @@
             <c:Method Name ="ShowText" Invoker="NotifyText"/>
             <c:Method Name ="Show" Invoker="Ask">
                 <c:Method.Target>
-                    <c:MessageBox Caption="タイトル" Button="{x:Static MessageBoxButton.YesNo}"/>
+                    <c:MessageBox Caption="Title" Button="{x:Static MessageBoxButton.YesNo}"/>
                 </c:Method.Target>
             </c:Method>
         </c:MethodCollection>
