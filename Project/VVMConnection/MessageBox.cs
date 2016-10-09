@@ -2,6 +2,10 @@
 
 namespace VVMConnection
 {
+    //TODO methodはstaticなのと結び付けたい
+    
+    //TODO Fileダイアログとか
+
     public class MessageBox
     {
         public string MessageBoxText { get; set; } = string.Empty;

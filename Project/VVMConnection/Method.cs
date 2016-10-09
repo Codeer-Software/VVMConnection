@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Windows;
 using System.Linq;
+using VVMConnection.Inside;
 
 namespace VVMConnection
 {
@@ -50,32 +51,46 @@ namespace VVMConnection
 
         Delegate GetMethod(FrameworkElement element, PropertyInfo invokerProp)
         {
-            object target = null;
-            if (Target != null)
-            {
-                target = Target;
-            }
-            else if (element != null)
-            {
-                target = element;
-            }
-            else
-            {
-                return null;
-            }
-
             var invokeInfo = invokerProp.PropertyType.GetMethod("Invoke");
             if (invokeInfo == null)
             {
                 return null;
             }
-            
-            var targetMethodInfo = target.GetType().GetMethod(Name, invokeInfo.GetParameters().Select(e=>e.ParameterType).ToArray());
-            if (targetMethodInfo == null)
+
+            var names = Name.Split('.');
+            if (names.Length != 1)
             {
-                return null;
+                var type = TypeFinder.GetType(string.Join(".", names.Take(names.Length - 1)));
+                var targetMethodInfo = type.GetMethod(names[names.Length - 1], invokeInfo.GetParameters().Select(e => e.ParameterType).ToArray());
+                if (targetMethodInfo == null)
+                {
+                    return null;
+                }
+                return targetMethodInfo.CreateDelegate(invokerProp.PropertyType);
             }
-            return targetMethodInfo.CreateDelegate(invokerProp.PropertyType, target);
+            else
+            {
+                object target = null;
+                if (Target != null)
+                {
+                    target = Target;
+                }
+                else if (element != null)
+                {
+                    target = element;
+                }
+                else
+                {
+                    return null;
+                }
+
+                var targetMethodInfo = target.GetType().GetMethod(Name, invokeInfo.GetParameters().Select(e => e.ParameterType).ToArray());
+                if (targetMethodInfo == null)
+                {
+                    return null;
+                }
+                return targetMethodInfo.CreateDelegate(invokerProp.PropertyType, target);
+            }
         }
     }
 }

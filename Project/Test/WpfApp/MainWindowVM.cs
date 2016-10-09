@@ -11,6 +11,7 @@ namespace WpfApp
         public ReactiveProperty<string> Answer { get; } = new ReactiveProperty<string>();
         public Action<string> NotifyText { get; set; }
         public Func<string, bool?> Ask { get; set; }
+        public Action StaticTest { get; set; }
 
         public MainWindowVM()
         {
@@ -21,6 +22,7 @@ namespace WpfApp
         public void HelloWorld()
         {
             NotifyText("HelloWorld");
+            StaticTest();
         }
 
         public void Calculate()

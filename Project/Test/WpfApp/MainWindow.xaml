@@ -13,6 +13,7 @@
     <c:Connection.Methods>
         <c:MethodCollection>
             <c:Method Name ="ShowText" Invoker="NotifyText"/>
+            <c:Method Name ="WpfApp.MainWindow.StaticMethod" Invoker="StaticTest"/>
             <c:Method Name ="Show" Invoker="Ask">
                 <c:Method.Target>
                     <c:MessageBox Caption="Title" Button="{x:Static MessageBoxButton.YesNo}"/>

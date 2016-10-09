@@ -13,5 +13,10 @@ namespace WpfApp
         {
             System.Windows.MessageBox.Show(this, text);
         }
+
+        public static void StaticMethod()
+        {
+            System.Windows.MessageBox.Show("static");
+        }
     }
 }

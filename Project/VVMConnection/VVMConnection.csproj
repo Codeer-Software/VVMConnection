@@ -48,6 +48,7 @@
     <Compile Include="Method.cs" />
     <Compile Include="MethodCollection.cs" />
     <Compile Include="Notify.cs" />
+    <Compile Include="ObservableCollectionEx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
